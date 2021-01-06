@@ -125,7 +125,7 @@ def signal_handler(signum, frame):
     """
     # Set exit event.
     exit_event.set()
-    print(F'Cleaning up {threading.active_count()} threads...')
+    print(F"Cleaning up {threading.active_count()} threads...")
 
     # Get all threads that are still alive.
     running_threads = [thread for thread in threads if thread.is_alive()]

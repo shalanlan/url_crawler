@@ -11,7 +11,6 @@ class TestURLCrawler(unittest.TestCase):
     # Test request_page_url: extract all links from html page of a get request.
     @patch('requests.get')
     def test_request_page_url(self, mock_get):
-
         # Setup mock html content for get request return value.
         get_response = """<html><head><title>Example Title</title></head>
         <body>
@@ -61,5 +60,6 @@ class TestURLCrawler(unittest.TestCase):
 
         self.assertEqual(expected_result, actual_results)
 
-        if __name__ == '__main__':
-            unittest.main()
+
+if __name__ == '__main__':
+    unittest.main()
