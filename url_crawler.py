@@ -1,10 +1,11 @@
-import requests
 import argparse
-import threading, sys, signal
+import signal
+import sys
+import threading
 from queue import Queue
-
-from bs4 import BeautifulSoup
+import requests
 import requests.exceptions as re
+from bs4 import BeautifulSoup
 
 url_queue = Queue()
 threads = []
@@ -27,6 +28,7 @@ def crawl_page(new_url):
     """
     # Check for thread signal termination.
     check_event()
+
     # Request contents of url and get all a tags.
     links = request_page_url(new_url)
     # Collect all valid href links that start with http.
@@ -137,6 +139,7 @@ def signal_handler(signum, frame):
 def append_list_to_q(new_list):
     """
     Helper function used to add new items to `url_queue`.
+
     :param new_list: list of new links to be added to queue (List of str)
     """
     for item in new_list:
@@ -161,6 +164,7 @@ if __name__ == "__main__":
     while True and not exit_event.is_set():
 
         url = url_queue.get()
+
         # Starts new thread. Children of each url are returned upon
         # termination and added to url_queue.
         new_thread = threading.Thread(target=lambda q,
